@@ -1,0 +1,25 @@
+{
+  "name": "cypress-typescript-framework",
+  "version": "1.0.0",
+  "description": "Cypress + TypeScript E2E testing framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cesarbeassuarez/cypress-typescript-framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cesarbeassuarez/cypress-typescript-framework/issues"
+  },
+  "homepage": "https://github.com/cesarbeassuarez/cypress-typescript-framework#readme",
+  "devDependencies": {
+    "cypress": "^15.17.0",
+    "typescript": "^6.0.3"
+  }
+}
