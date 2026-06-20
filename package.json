@@ -4,7 +4,8 @@
   "description": "Cypress + TypeScript E2E testing framework",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:run": "cypress run --browser edge"
   },
   "repository": {
     "type": "git",

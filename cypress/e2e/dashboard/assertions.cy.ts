@@ -1,11 +1,7 @@
 describe('Serenity.is Dashboard — Assertions y Hooks', () => {
 
     beforeEach(() => {
-      cy.visit('/Account/Login')
-      cy.get('#LoginPanel0_Username').should('be.enabled').clear().type('admin')
-      cy.get('#LoginPanel0_Password').should('be.enabled').clear().type('serenity')
-      cy.get('#LoginPanel0_LoginButton').click()
-      cy.url().should('not.include', '/Account/Login')
+      cy.login('admin', 'serenity')
     })
   
     context('page structure', () => {
