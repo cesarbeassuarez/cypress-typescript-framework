@@ -4,7 +4,7 @@ describe('Serenity.is Dashboard — Assertions y Hooks', () => {
     const dashboardPage = new DashboardPage()
 
     beforeEach(() => {
-        cy.login('admin', 'serenity')
+        cy.login()
     })
 
     context('page structure', () => {

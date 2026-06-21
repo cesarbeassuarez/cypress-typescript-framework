@@ -1,6 +1,20 @@
 {
-    "admin": {
+    "validUser": {
+      "username": "admin",
+      "password": "serenity"
+    },
+    "invalidCredentials": [
+      {
+        "caso": "Password incorrecta",
         "username": "admin",
-        "password": "serenity"
-    }
-}
+        "password": "wrongpassword",
+        "expectedError": "Nombre de usuario o contraseña inválidos"
+      },
+      {
+        "caso": "Usuario incorrecto",
+        "username": "wronguser",
+        "password": "serenity",
+        "expectedError": "Nombre de usuario o contraseña inválidos"
+      }
+    ]
+  }
