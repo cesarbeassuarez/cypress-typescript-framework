@@ -22,5 +22,8 @@
   "devDependencies": {
     "cypress": "^15.17.0",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
   }
 }
