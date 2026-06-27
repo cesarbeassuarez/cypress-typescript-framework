@@ -1,7 +1,7 @@
 export class ClientesPage {
     // Selectores base
     private heading = '#GridDiv'
-    private searchBox = 'input[name="SearchBox"]'
+    private searchBox = 'input.s-QuickSearchInput'
     private newClientButton = '.s-Northwind-CustomerGrid .add-button'
 
     // Filtros
@@ -27,5 +27,42 @@ export class ClientesPage {
 
     getGrillaFilas() {
         return cy.get(this.grillaFilas)
+    }
+    ordenarPorID() {
+        cy.get(this.headerID).click()
+    }
+    
+    ordenarPorEmpresa() {
+        cy.get(this.headerEmpresa).click()
+    }
+    
+    getPrimerIDVisible() {
+        return cy.get(this.grillaFilas).first().find('div.slick-cell.l0')
+    }
+    
+    getPrimerValorColumna(colIndex: number) {
+        return cy.get(this.grillaFilas).first().find(`div.slick-cell.l${colIndex}`)
+    }
+
+    filtrarPorPais(pais: string) {
+        cy.get(this.filtroPais).find('.select2-choice').click()
+        cy.get('.select2-results').contains(pais).click()
+    }
+    
+    filtrarPorCiudad(ciudad: string) {
+        cy.get(this.filtroCiudad).find('.select2-choice').click()
+        cy.get('.select2-results').contains(ciudad).click()
+    }
+    
+    limpiarFiltroPais() {
+        cy.get(this.filtroPais).find('abbr.select2-search-choice-close').click()
+    }
+
+    buscar(texto: string) {
+        cy.get(this.searchBox).clear().type(texto, { delay: 50 })
+    }
+    
+    limpiarBusqueda() {
+        cy.get(this.searchBox).clear()
     }
 }
