@@ -1,0 +1,41 @@
+{
+    "Entities": [
+      {
+        "CustomerID": "FAKE1",
+        "CompanyName": "Empresa Stub Uno",
+        "ContactName": "Juan Stub",
+        "ContactTitle": "Manager",
+        "Region": "Sur",
+        "PostalCode": "5000",
+        "Country": "Argentina",
+        "City": "Córdoba",
+        "Phone": "(0351) 555-0001",
+        "Fax": "(0351) 555-0002"
+      },
+      {
+        "CustomerID": "FAKE2",
+        "CompanyName": "Empresa Stub Dos",
+        "ContactName": "María Stub",
+        "ContactTitle": "Owner",
+        "Region": "Norte",
+        "PostalCode": "4000",
+        "Country": "Argentina",
+        "City": "Tucumán",
+        "Phone": "(0381) 555-0003",
+        "Fax": "(0381) 555-0004"
+      },
+      {
+        "CustomerID": "FAKE3",
+        "CompanyName": "Empresa Stub Tres",
+        "ContactName": "Pedro Stub",
+        "ContactTitle": "Sales Representative",
+        "Region": "Centro",
+        "PostalCode": "1000",
+        "Country": "Argentina",
+        "City": "Buenos Aires",
+        "Phone": "(011) 555-0005",
+        "Fax": "(011) 555-0006"
+      }
+    ],
+    "TotalCount": 3
+  }
