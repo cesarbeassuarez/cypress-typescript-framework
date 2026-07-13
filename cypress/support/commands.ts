@@ -13,7 +13,14 @@ Cypress.Commands.add('login', (username?: string, password?: string) => {
         doLogin(username, password)
     } else {
         cy.fixture('users').then((users) => {
-            doLogin(users.validUser.username, users.validUser.password)
+            cy.session('default-user', () => {
+                doLogin(users.validUser.username, users.validUser.password)
+            }, {
+                validate() {
+                    cy.getCookie('.AspNetAuth').should('exist')
+                }
+            })
+            cy.visit('/')
         })
     }
 })

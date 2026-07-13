@@ -15,6 +15,13 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+
+beforeEach(() => {
+    cy.intercept('**', (req) => {
+        req.headers['accept-language'] = 'es-AR,es;q=0.9'
+    })
+})
+
 Cypress.on('uncaught:exception', (err) => {
     if (err.message.includes('Bad Request')) {
         return false

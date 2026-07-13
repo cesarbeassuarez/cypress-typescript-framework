@@ -59,11 +59,11 @@ describe('Serenity.is Login Page', () => {
 
         it('should find the login button by text', () => {
             loginPage.visit()
-            cy.contains('Sign In').should('be.visible')
-            cy.contains('Forgot password?').should('be.visible')
+            cy.contains('Iniciar sesión').should('be.visible')
+            cy.contains('¿Olvidaste tu contraseña?').should('be.visible')
             cy.contains('Google').should('be.visible')
         })
-
+        
         it('should find elements within the login form', () => {
             loginPage.visit()
             cy.get('#LoginPanel').within(() => {
@@ -71,7 +71,7 @@ describe('Serenity.is Login Page', () => {
                 cy.get('input[name="Password"]').should('exist')
                 cy.get('button[type="submit"]').should('be.visible')
             })
-            cy.get('#LoginPanel').find('button[type="submit"]').should('contain', 'Sign In')
+            cy.get('#LoginPanel').find('button[type="submit"]').should('contain', 'Iniciar sesión')
         })
 
     })
