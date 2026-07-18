@@ -16,6 +16,9 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+import 'cypress-real-events'
+import './commands'
+
 beforeEach(() => {
     cy.intercept('**', (req) => {
         req.headers['accept-language'] = 'es-AR,es;q=0.9'
