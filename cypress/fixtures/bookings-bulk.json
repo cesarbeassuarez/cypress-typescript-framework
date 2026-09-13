@@ -1,0 +1,26 @@
+[
+    {
+        "firstname": "Ana",
+        "lastname": "Perez",
+        "totalprice": 100,
+        "depositpaid": true,
+        "bookingdates": { "checkin": "2026-10-01", "checkout": "2026-10-03" },
+        "additionalneeds": "Breakfast"
+    },
+    {
+        "firstname": "Luis",
+        "lastname": "Gomez",
+        "totalprice": 220,
+        "depositpaid": false,
+        "bookingdates": { "checkin": "2026-10-05", "checkout": "2026-10-10" },
+        "additionalneeds": "Dinner"
+    },
+    {
+        "firstname": "Sofia",
+        "lastname": "Diaz",
+        "totalprice": 500,
+        "depositpaid": true,
+        "bookingdates": { "checkin": "2026-11-11", "checkout": "2026-11-15" },
+        "additionalneeds": "None"
+    }
+]

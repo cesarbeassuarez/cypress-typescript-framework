@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cy:run": "cypress run --browser edge"
+    "cy:run": "cypress run --browser edge",
+    "cy:run:api": "cypress run --browser edge --spec \"cypress/e2e/api/**/*.cy.ts\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,8 @@
   },
   "homepage": "https://github.com/cesarbeassuarez/cypress-typescript-framework#readme",
   "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "cypress": "^15.17.0",
     "cypress-real-events": "^1.15.0",
     "typescript": "^6.0.3"

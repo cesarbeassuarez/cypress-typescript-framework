@@ -14,6 +14,11 @@ export default defineConfig({
     video: false,
     screenshotOnRunFailure: true,
     specPattern: 'cypress/e2e/**/*.cy.ts',
+    env: {
+      // URL de la API pública que uso en el módulo API testing.
+      // Restful-Booker: https://restful-booker.herokuapp.com/apidoc/
+      apiUrl: 'https://restful-booker.herokuapp.com'
+    },
     setupNodeEvents(on, config) {
       on('task', {
         async leerClientesDesdeExcel(rutaArchivo: string) {
