@@ -3,10 +3,11 @@ import addFormats from 'ajv-formats'
 
 // API pública pensada para practicar automation:
 //   https://restful-booker.herokuapp.com/apidoc/
-// La URL viene de cypress.config.ts → env.apiUrl (no la hardcodeo acá).
+// La URL es config pública → cypress.config.ts → expose.apiUrl.
+// Cypress.expose() es SÍNCRONO, así que la puedo leer acá arriba.
 
 describe('API testing con cy.request — Restful-Booker', () => {
-    const apiUrl = Cypress.env('apiUrl') as string
+    const apiUrl = Cypress.expose('apiUrl') as string
 
     // ─────────────────────────────────────────────────────────
     // 1. GET — leer datos
@@ -60,13 +61,16 @@ describe('API testing con cy.request — Restful-Booker', () => {
     // ─────────────────────────────────────────────────────────
     context('2. Auth — POST /auth', () => {
         it('credenciales válidas devuelven token', () => {
-            cy.request('POST', `${apiUrl}/auth`, {
-                username: 'admin',
-                password: 'password123'
-            }).then((response) => {
-                expect(response.status).to.eq(200)
-                expect(response.body).to.have.property('token')
-                expect(response.body.token).to.be.a('string').and.have.length.above(10)
+            // Credenciales sensibles → cy.env() (asíncrono, no expone al browser).
+            cy.env(['apiUser', 'apiPassword']).then(({ apiUser, apiPassword }) => {
+                cy.request('POST', `${apiUrl}/auth`, {
+                    username: apiUser,
+                    password: apiPassword
+                }).then((response) => {
+                    expect(response.status).to.eq(200)
+                    expect(response.body).to.have.property('token')
+                    expect(response.body.token).to.be.a('string').and.have.length.above(10)
+                })
             })
         })
 
@@ -130,11 +134,13 @@ describe('API testing con cy.request — Restful-Booker', () => {
         beforeEach(() => {
             // Cada test parte de un booking limpio y un token fresco.
             // Usar `before` acumularía estado entre tests si uno falla.
-            cy.request('POST', `${apiUrl}/auth`, {
-                username: 'admin',
-                password: 'password123'
-            }).its('body.token').then((t: string) => {
-                token = t
+            cy.env(['apiUser', 'apiPassword']).then(({ apiUser, apiPassword }) => {
+                cy.request('POST', `${apiUrl}/auth`, {
+                    username: apiUser,
+                    password: apiPassword
+                }).its('body.token').then((t: string) => {
+                    token = t
+                })
             })
 
             cy.fixture('booking').then((payload) => {

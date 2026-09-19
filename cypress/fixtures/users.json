@@ -1,8 +1,4 @@
 {
-    "validUser": {
-      "username": "admin",
-      "password": "serenity"
-    },
     "invalidCredentials": [
       {
         "caso": "Password incorrecta",

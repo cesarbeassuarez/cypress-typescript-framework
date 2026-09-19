@@ -2,6 +2,18 @@ import { defineConfig } from 'cypress'
 import ExcelJS from 'exceljs'
 
 export default defineConfig({
+  // ─────────────────────────────────────────────────────────
+  // Config PÚBLICA (no sensible): se expone al browser a propósito.
+  // URLs, feature flags, versiones de API... se leen con Cypress.expose().
+  // ─────────────────────────────────────────────────────────
+  expose: {
+    // API pública que uso en el módulo de API testing.
+    // Restful-Booker: https://restful-booker.herokuapp.com/apidoc/
+    apiUrl: 'https://restful-booker.herokuapp.com'
+  },
+  // Corta el uso del viejo Cypress.env() (deprecado por inseguro desde 15.10).
+  // Obliga a usar cy.env() para secretos y Cypress.expose() para config pública.
+  allowCypressEnv: false,
   e2e: {
     baseUrl: 'https://demo.serenity.is',
     viewportWidth: 1280,
@@ -14,11 +26,6 @@ export default defineConfig({
     video: false,
     screenshotOnRunFailure: true,
     specPattern: 'cypress/e2e/**/*.cy.ts',
-    env: {
-      // URL de la API pública que uso en el módulo API testing.
-      // Restful-Booker: https://restful-booker.herokuapp.com/apidoc/
-      apiUrl: 'https://restful-booker.herokuapp.com'
-    },
     setupNodeEvents(on, config) {
       on('task', {
         async leerClientesDesdeExcel(rutaArchivo: string) {

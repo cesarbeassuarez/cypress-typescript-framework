@@ -70,6 +70,10 @@ web_modules/
 .env.*
 !.env.example
 
+# Cypress env vars — credenciales/secretos, NO subir al repo.
+# El template versionado es cypress.env.example.json.
+cypress.env.json
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache

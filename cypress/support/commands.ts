@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 
 // ─────────────────────────────────────────────────────────
-// UI login (Serenity.is) — el que ya venía usando
+// UI login (Serenity.is) — el que ya venía usando.
+// Credenciales sensibles → cy.env() (quedan en el proceso de Node,
+// nunca se serializan al browser como hacía Cypress.env()).
 // ─────────────────────────────────────────────────────────
 Cypress.Commands.add('login', (username?: string, password?: string) => {
     const doLogin = (user: string, pass: string) => {
@@ -15,9 +17,9 @@ Cypress.Commands.add('login', (username?: string, password?: string) => {
     if (username && password) {
         doLogin(username, password)
     } else {
-        cy.fixture('users').then((users) => {
+        cy.env(['user', 'password']).then(({ user, password }) => {
             cy.session('default-user', () => {
-                doLogin(users.validUser.username, users.validUser.password)
+                doLogin(user as string, password as string)
             }, {
                 validate() {
                     cy.getCookie('.AspNetAuth').should('exist')
@@ -29,14 +31,26 @@ Cypress.Commands.add('login', (username?: string, password?: string) => {
 })
 
 // ─────────────────────────────────────────────────────────
-// API auth (Restful-Booker) — POST /auth y devuelve token
+// API auth (Restful-Booker) — POST /auth y devuelve token.
+// apiUrl es config pública → Cypress.expose() (síncrono).
+// Las credenciales son secretas → cy.env() (asíncrono).
 // ─────────────────────────────────────────────────────────
-Cypress.Commands.add('apiLogin', (username = 'admin', password = 'password123') => {
-    const apiUrl = Cypress.env('apiUrl') as string
+Cypress.Commands.add('apiLogin', (username?: string, password?: string) => {
+    const apiUrl = Cypress.expose('apiUrl') as string
 
-    return cy.request('POST', `${apiUrl}/auth`, { username, password })
-        .its('body.token')
-        .should('be.a', 'string')
+    const resolveCreds =
+        username && password
+            ? cy.wrap({ user: username, pass: password }, { log: false })
+            : cy.env(['apiUser', 'apiPassword']).then((e) => ({
+                  user: e.apiUser as string,
+                  pass: e.apiPassword as string
+              }))
+
+    return resolveCreds.then(({ user, pass }) =>
+        cy.request('POST', `${apiUrl}/auth`, { username: user, password: pass })
+            .its('body.token')
+            .should('be.a', 'string')
+    )
 })
 
 // ─────────────────────────────────────────────────────────
@@ -46,7 +60,7 @@ Cypress.Commands.add('apiLogin', (username = 'admin', password = 'password123') 
 Cypress.Commands.add(
     'authRequest',
     (method: Cypress.HttpMethod, url: string, token: string, body?: unknown) => {
-        const apiUrl = Cypress.env('apiUrl') as string
+        const apiUrl = Cypress.expose('apiUrl') as string
         const fullUrl = url.startsWith('http') ? url : `${apiUrl}${url}`
 
         return cy.request({

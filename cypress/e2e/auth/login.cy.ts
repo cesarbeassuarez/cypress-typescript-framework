@@ -13,8 +13,11 @@ describe('Serenity.is Login Page', () => {
         })
 
         it('should login with valid credentials', () => {
+            // Credenciales sensibles desde cy.env() (no se exponen al browser).
             loginPage.visit()
-            loginPage.login(users.validUser.username, users.validUser.password)
+            cy.env(['user', 'password']).then(({ user, password }) => {
+                loginPage.login(user as string, password as string)
+            })
             cy.url().should('not.include', '/Account/Login')
         })
 
@@ -63,7 +66,7 @@ describe('Serenity.is Login Page', () => {
             cy.contains('¿Olvidaste tu contraseña?').should('be.visible')
             cy.contains('Google').should('be.visible')
         })
-        
+
         it('should find elements within the login form', () => {
             loginPage.visit()
             cy.get('#LoginPanel').within(() => {
