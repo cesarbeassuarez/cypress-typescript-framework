@@ -31,13 +31,17 @@ describe('API testing con cy.request — Restful-Booker', () => {
 
                 cy.request('GET', `${apiUrl}/booking/${firstId}`).then((detail) => {
                     expect(detail.status).to.eq(200)
-                    expect(detail.body).to.have.all.keys(
+                    // additionalneeds es OPCIONAL en restful-booker: solo viene si
+                    // la reserva se creó con ese campo. Como el chaining agarra el
+                    // primer id de la lista (cualquiera), no puedo asumir que esté.
+                    // Por eso valido las 5 keys obligatorias con include.keys
+                    // (permite keys extra) en vez de have.all.keys (exige exactas).
+                    expect(detail.body).to.include.keys(
                         'firstname',
                         'lastname',
                         'totalprice',
                         'depositpaid',
-                        'bookingdates',
-                        'additionalneeds'
+                        'bookingdates'
                     )
                 })
             })

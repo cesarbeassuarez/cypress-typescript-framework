@@ -96,6 +96,11 @@ describe('cy.intercept — stubbing y mocking', () => {
         })
 
         it('error de red — conexión cortada', () => {
+            // forceNetworkError hace que la app lance una excepción no controlada
+            // (el fetch falla). Sin esto, esa excepción cae en el afterEach de Allure
+            // y Cypress saca una captura "fantasma" del hook. La ignoro igual que en el 500.
+            cy.on('uncaught:exception', () => false)
+
             cy.intercept('POST', customerListUrl, { forceNetworkError: true }).as('networkError')
 
             cy.login()

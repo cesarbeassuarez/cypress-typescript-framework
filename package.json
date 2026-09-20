@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:run": "cypress run --browser edge",
-    "cy:run:api": "cypress run --browser edge --spec \"cypress/e2e/api/**/*.cy.ts\""
+    "cy:run:api": "cypress run --browser edge --spec \"cypress/e2e/api/**/*.cy.ts\"",
+    "report": "node scripts/report.js",
+    "allure:generate": "allure generate allure-results",
+    "allure:open": "allure open allure-report"
   },
   "repository": {
     "type": "git",
@@ -23,7 +26,11 @@
   "devDependencies": {
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
+    "allure": "^3.18.0",
+    "allure-cypress": "^3.12.2",
     "cypress": "^15.17.0",
+    "cypress-mochawesome-reporter": "^5.0.0",
+    "cypress-on-fix": "^1.1.0",
     "cypress-real-events": "^1.15.0",
     "typescript": "^6.0.3"
   },

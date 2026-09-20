@@ -17,7 +17,14 @@
 import './commands'
 
 import 'cypress-real-events'
-import './commands'
+
+// ─────────────────────────────────────────────────────────
+// Reporters (lado browser). Cada uno necesita su registro acá:
+// Mochawesome engancha los hooks para las capturas y el HTML,
+// Allure engancha el ciclo de vida de cada test para sus results.
+// ─────────────────────────────────────────────────────────
+import 'cypress-mochawesome-reporter/register'
+import 'allure-cypress'
 
 beforeEach(() => {
     cy.intercept('**', (req) => {

@@ -149,3 +149,10 @@ vite.config.ts.timestamp-*
 cypress/videos/
 cypress/screenshots/
 cypress/downloads/
+
+# Reportes generados (Mochawesome + Allure)
+cypress/reports/
+allure-results/
+allure-report/
+allure-history.jsonl
+.allure/
